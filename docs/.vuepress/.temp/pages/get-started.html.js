@@ -1,3 +1,16 @@
 import comp from "/Users/yinian/Desktop/Shuttle/docs/.vuepress/.temp/pages/get-started.html.vue"
 const data = JSON.parse("{\"path\":\"/get-started.html\",\"title\":\"Shuttle主题总览\",\"lang\":\"zh-CN\",\"frontmatter\":{},\"headers\":[],\"git\":{\"updatedTime\":1765782001000,\"contributors\":[{\"name\":\"shuttleITS\",\"username\":\"shuttleITS\",\"email\":\"i@xiamii.com\",\"commits\":3,\"url\":\"https://github.com/shuttleITS\"}],\"changelog\":[{\"hash\":\"c3ecacdc9b2abe53d866e4af5d9b566b3d655fab\",\"time\":1765782001000,\"email\":\"i@xiamii.com\",\"author\":\"shuttleITS\",\"message\":\"getstarturl\"},{\"hash\":\"d36845cdd1624c517083e9b850eeedfb825633ee\",\"time\":1765781866000,\"email\":\"i@xiamii.com\",\"author\":\"shuttleITS\",\"message\":\"getstarturl\"},{\"hash\":\"d24cde3e182d5bfc6af249a7e657bbdffed1897e\",\"time\":1765778259000,\"email\":\"i@xiamii.com\",\"author\":\"shuttleITS\",\"message\":\"first\"}]},\"filePathRelative\":\"get-started.md\"}")
 export { comp, data }
+
+if (import.meta.webpackHot) {
+  import.meta.webpackHot.accept()
+  if (__VUE_HMR_RUNTIME__.updatePageData) {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  }
+}
+
+if (import.meta.hot) {
+  import.meta.hot.accept(({ data }) => {
+    __VUE_HMR_RUNTIME__.updatePageData(data)
+  })
+}
