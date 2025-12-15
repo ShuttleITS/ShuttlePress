@@ -8,7 +8,7 @@ export default defineUserConfig({
   title: 'Shuttle',
   description: 'Shuttle 前端主题的安装、配置与定制指南',
   // GitHub Pages 项目站点需要配置 base，确保静态资源路径正确
-  base: '/ShuttlePress/',
+  base: '/',
 
   theme: defaultTheme({
     navbar: [
