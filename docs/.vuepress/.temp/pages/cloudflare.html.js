@@ -1,16 +1,3 @@
 import comp from "/Users/yinian/Desktop/Shuttle/docs/.vuepress/.temp/pages/cloudflare.html.vue"
-const data = JSON.parse("{\"path\":\"/cloudflare.html\",\"title\":\"Cloudflare Pages 部署\",\"lang\":\"zh-CN\",\"frontmatter\":{},\"headers\":[{\"level\":2,\"title\":\"方式一：连接仓库\",\"slug\":\"方式一-连接仓库\",\"link\":\"#方式一-连接仓库\",\"children\":[]},{\"level\":2,\"title\":\"方式二：直接上传构建包（推荐给只拿成品的用户）\",\"slug\":\"方式二-直接上传构建包-推荐给只拿成品的用户\",\"link\":\"#方式二-直接上传构建包-推荐给只拿成品的用户\",\"children\":[]},{\"level\":2,\"title\":\"反向代理示例（/api/v1/ 与 /idhub-api/）\",\"slug\":\"反向代理示例-api-v1-与-idhub-api\",\"link\":\"#反向代理示例-api-v1-与-idhub-api\",\"children\":[]},{\"level\":2,\"title\":\"SPA 路由设置\",\"slug\":\"spa-路由设置\",\"link\":\"#spa-路由设置\",\"children\":[]},{\"level\":2,\"title\":\"常见配置\",\"slug\":\"常见配置\",\"link\":\"#常见配置\",\"children\":[]},{\"level\":2,\"title\":\"故障排查\",\"slug\":\"故障排查\",\"link\":\"#故障排查\",\"children\":[]}],\"git\":{},\"filePathRelative\":\"cloudflare.md\"}")
+const data = JSON.parse("{\"path\":\"/cloudflare.html\",\"title\":\"Cloudflare Pages 部署\",\"lang\":\"zh-CN\",\"frontmatter\":{},\"headers\":[{\"level\":2,\"title\":\"方式一：连接仓库\",\"slug\":\"方式一-连接仓库\",\"link\":\"#方式一-连接仓库\",\"children\":[]},{\"level\":2,\"title\":\"方式二：直接上传构建包（推荐给只拿成品的用户）\",\"slug\":\"方式二-直接上传构建包-推荐给只拿成品的用户\",\"link\":\"#方式二-直接上传构建包-推荐给只拿成品的用户\",\"children\":[]},{\"level\":2,\"title\":\"反向代理示例（/api/v1/ 与 /idhub-api/）\",\"slug\":\"反向代理示例-api-v1-与-idhub-api\",\"link\":\"#反向代理示例-api-v1-与-idhub-api\",\"children\":[]},{\"level\":2,\"title\":\"SPA 路由设置\",\"slug\":\"spa-路由设置\",\"link\":\"#spa-路由设置\",\"children\":[]},{\"level\":2,\"title\":\"常见配置\",\"slug\":\"常见配置\",\"link\":\"#常见配置\",\"children\":[]},{\"level\":2,\"title\":\"故障排查\",\"slug\":\"故障排查\",\"link\":\"#故障排查\",\"children\":[]}],\"git\":{\"updatedTime\":1765778259000,\"contributors\":[{\"name\":\"shuttleITS\",\"username\":\"shuttleITS\",\"email\":\"i@xiamii.com\",\"commits\":1,\"url\":\"https://github.com/shuttleITS\"}],\"changelog\":[{\"hash\":\"d24cde3e182d5bfc6af249a7e657bbdffed1897e\",\"time\":1765778259000,\"email\":\"i@xiamii.com\",\"author\":\"shuttleITS\",\"message\":\"first\"}]},\"filePathRelative\":\"cloudflare.md\"}")
 export { comp, data }
-
-if (import.meta.webpackHot) {
-  import.meta.webpackHot.accept()
-  if (__VUE_HMR_RUNTIME__.updatePageData) {
-    __VUE_HMR_RUNTIME__.updatePageData(data)
-  }
-}
-
-if (import.meta.hot) {
-  import.meta.hot.accept(({ data }) => {
-    __VUE_HMR_RUNTIME__.updatePageData(data)
-  })
-}
