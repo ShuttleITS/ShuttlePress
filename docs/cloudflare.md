@@ -9,7 +9,7 @@
 ## 完整步骤
 
 ### 1）准备前端构建产物
-- 使用打包机：在前端构建页面，把后端 API 地址填写为 Worker 的 URL（如 `https://api-proxy.example.workers.dev` 或绑定的 `https://api.example.com`），一键打包即可。
+- 使用打包机：在前端构建页面，把后端 API 地址填写为 Worker 的 URL（如 `https://api-proxy.example.workers.dev/api/v1/` 或绑定的 `https://api.example.com/api/v1/`），一键打包即可。
 
 
 ### 2）创建 Worker 反代
@@ -90,8 +90,7 @@ function applyCorsHeaders(headers, request) {
   headers.set('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
 }
 ```
-- 如果有额外前缀，继续在 `ROUTES` 里追加。
-- 若需要把静态资源也交给 Worker，可改用 Pages Functions（把代码放在 `/functions/[[path]].js`），本文用独立 Worker 绑定到 API 路由。
+
 
 ### 3）绑定 Worker 到域名路由
 1. Worker 详情 → Triggers → Add custom domain 或 Routes。
