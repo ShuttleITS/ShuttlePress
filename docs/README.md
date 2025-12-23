@@ -5,7 +5,7 @@ heroText: Shuttle Theme
 tagline: 轻量，单独构建，去特质，前后端分离主题
 actions:
   - text: 快速开始
-    link: /changelog.html
+    link: /get-started.html
     type: primary
   - text: 演示站点
     link: https://mimiairport.pages.dev/

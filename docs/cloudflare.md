@@ -2,56 +2,113 @@
 
 > 适用于 Shuttle 主题构建产物（`index.html` + `assets/`）。使用 Cloudflare Pages 托管，自动提供 CDN 与 SSL。
 
-## 方式一：连接仓库
-1. 登录 Cloudflare → Pages → Create a project → 选择仓库。
-2. 构建设置：
-   - Framework preset：`None`（静态站点）
-   - Build command：**留空**（因为你上传的是已构建产物）
-   - Build output directory：`dist`
-3. 保存并部署，CF 会直接发布已有产物，不会执行构建。
-4. 部署完成后在 Pages → Settings 中绑定自定义域名并开启强制 HTTPS。
+## 部署思路
+- Pages 只托管静态站点。
+- Worker 负责把 `/api/*` 等接口转发到真实后端，前端构建时填 Worker 的地址（同域或 Workers.dev 自带域）作为 API 基址，避免跨域与源站暴露。
 
-## 方式二：直接上传构建包（推荐给只拿成品的用户）
-1. 本地已有构建目录（含 `index.html`）。
-2. Cloudflare Pages → Create a project → Upload assets。
-3. 拖拽整个构建目录上传，等待发布完成。
+## 完整步骤
 
-## 反向代理示例（/api/v1/ 与 /idhub-api/）
-如果后端在其他域名，可用 Cloudflare Worker 反代，保留默认路径：
+### 1）准备前端构建产物
+- 使用打包机：在前端构建页面，把后端 API 地址填写为 Worker 的 URL（如 `https://api-proxy.example.workers.dev` 或绑定的 `https://api.example.com`），一键打包即可。
+
+
+### 2）创建 Worker 反代
+1. Cloudflare 控制台 → Workers & Pages → Create application → Worker → Quick edit。
+2. 粘贴下方示例代码，保存并部署。
+3. 将 `ALLOWED_ORIGINS` 换成你的 Pages 域名/自定义域；将 `ROUTES` 中的 `target` 换成真实后端。
+
 ```js
 // worker.js
-const API_HOST = 'https://xxx.xxx.com';
+// Whitelist frontends. Add more allowed origins as needed.
+const ALLOWED_ORIGINS = ['https://example.pages.dev', 'https://www.example.com'];
+
+// Map incoming path prefixes to backend targets
+const ROUTES = [
+  {
+    prefix: '/api/v1/',
+    target: 'https://api.example.com/api/v1/',
+  },
+  {
+    prefix: '/idhub-api/',
+    target: 'https://id.example.com/',
+  },
+];
 
 export default {
   async fetch(request) {
     const url = new URL(request.url);
-
-    if (url.pathname.startsWith('/api/v1/')) {
-      const target = new URL(API_HOST);
-      target.pathname = url.pathname;
-      target.search = url.search;
-      return fetch(target.toString(), rewriteHeaders(request, target.host));
+    const route = ROUTES.find(r => url.pathname.startsWith(r.prefix));
+    if (!route) {
+      return new Response('Not found', { status: 404 });
     }
 
-    if (url.pathname.startsWith('/idhub-api/')) {
-      const target = new URL(API_HOST);
-      target.pathname = url.pathname; // 默认后端根路径支持 /idhub-api/
-      target.search = url.search;
-      return fetch(target.toString(), rewriteHeaders(request, target.host));
+    // Preflight
+    if (request.method === 'OPTIONS') {
+      return new Response(null, {
+        status: 204,
+        headers: buildCorsHeaders(),
+      });
     }
 
-    return fetch(request); // 其余请求走静态资源
+    const backendPath = url.pathname.slice(route.prefix.length);
+    const targetUrl = `${route.target}${backendPath}${url.search}`;
+
+    const headers = new Headers(request.headers);
+    headers.set('host', new URL(route.target).host); // ensure Host header matches backend
+
+    const init = {
+      method: request.method,
+      headers,
+      body: request.method === 'GET' || request.method === 'HEAD' ? undefined : request.body,
+      redirect: 'manual',
+    };
+
+    const resp = await fetch(new Request(targetUrl, init));
+    const proxied = new Response(resp.body, resp);
+    applyCorsHeaders(proxied.headers, request);
+    return proxied;
   },
 };
 
-function rewriteHeaders(request, host) {
-  const headers = new Headers(request.headers);
-  headers.set('Host', host);
-  return new Request(request, { headers });
+function buildCorsHeaders() {
+  const headers = new Headers();
+  applyCorsHeaders(headers);
+  headers.set('Access-Control-Max-Age', '86400');
+  return headers;
+}
+
+function applyCorsHeaders(headers, request) {
+  const requestOrigin = request?.headers.get('Origin');
+  const allowOrigin =
+    requestOrigin && ALLOWED_ORIGINS.includes(requestOrigin)
+      ? requestOrigin
+      : ALLOWED_ORIGINS[0];
+
+  headers.set('Access-Control-Allow-Origin', allowOrigin);
+  headers.set('Access-Control-Allow-Credentials', 'true');
+  headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  headers.set('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
 }
 ```
-- 部署：使用 Wrangler 发布 Worker 并绑定到你的域名路由（如 `example.com/api/*`），或在 Pages → Functions 中放置同名文件（需开启 Pages Functions）。
-- 将 `xxx.xxx.com` 替换为后端域名；如后端路径不同，调整 `pathname`。
+- 如果有额外前缀，继续在 `ROUTES` 里追加。
+- 若需要把静态资源也交给 Worker，可改用 Pages Functions（把代码放在 `/functions/[[path]].js`），本文用独立 Worker 绑定到 API 路由。
+
+### 3）绑定 Worker 到域名路由
+1. Worker 详情 → Triggers → Add custom domain 或 Routes。
+2. 示例：`example.com/api/*` 指向上面创建的 Worker。这样 `/api/...` 走 Worker，其余路径仍由 Pages 提供静态资源。
+3. 若暂不绑定自定义域，可直接用 `https://<worker>.workers.dev` 作为 API 基址（但前端也要把允许源里加上对应域名）。
+
+### 4）发布 Pages 静态站点
+**方式 A：连接仓库（推荐）**
+1. 登录 Cloudflare → Pages → Create a project → 选择仓库。
+2. Build command：**留空**（上传构建产物即可）；Build output directory：`dist`；Framework preset：`None`。
+3. 保存并部署。
+
+**方式 B：直接上传构建包**
+1. Pages → Create a project → Upload assets。
+2. 拖拽 `dist/`（含 `index.html`）上传。
+
+部署后在 Pages → Settings 绑定自定义域名（如 `www.example.com`），并开启强制 HTTPS。若已在步骤 3 绑定了 `example.com/api/*`，确保 Pages 的域名与 Worker 域名一致，这样前端与接口同源。
 
 ## SPA 路由设置
 在 Pages 项目 → Settings → Functions → 添加自定义 404 回退：
