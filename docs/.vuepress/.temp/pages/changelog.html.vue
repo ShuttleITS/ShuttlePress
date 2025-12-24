@@ -1,4 +1,8 @@
 <template><div><h1 id="更新日志" tabindex="-1"><a class="header-anchor" href="#更新日志"><span>更新日志</span></a></h1>
+<p>V0.9.7</p>
+<ul>
+<li>新增落地页开关功能，支持在构建阶段选择是否启用落地页</li>
+</ul>
 <p>V0.9.6</p>
 <ul>
 <li>更新记录：增加注册和找回密码captcha</li>
