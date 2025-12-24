@@ -1,7 +1,7 @@
 export const redirects = JSON.parse("{}")
 
 export const routes = Object.fromEntries([
-  ["/", { loader: () => import(/* webpackChunkName: "index.html" */"/Users/yinian/Desktop/Shuttle/docs/.vuepress/.temp/pages/index.html.js"), meta: {"title":"Shuttle 机场主题"} }],
+  ["/", { loader: () => import(/* webpackChunkName: "index.html" */"/Users/yinian/Desktop/Shuttle/docs/.vuepress/.temp/pages/index.html.js"), meta: {"title":"Shuttle 主题"} }],
   ["/aapanel.html", { loader: () => import(/* webpackChunkName: "aapanel.html" */"/Users/yinian/Desktop/Shuttle/docs/.vuepress/.temp/pages/aapanel.html.js"), meta: {"title":"宝塔面板（aaPanel）部署指南"} }],
   ["/changelog.html", { loader: () => import(/* webpackChunkName: "changelog.html" */"/Users/yinian/Desktop/Shuttle/docs/.vuepress/.temp/pages/changelog.html.js"), meta: {"title":"更新日志"} }],
   ["/cloudflare.html", { loader: () => import(/* webpackChunkName: "cloudflare.html" */"/Users/yinian/Desktop/Shuttle/docs/.vuepress/.temp/pages/cloudflare.html.js"), meta: {"title":"Cloudflare Pages 部署"} }],
