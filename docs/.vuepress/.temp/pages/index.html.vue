@@ -21,7 +21,7 @@
 </div>
 <div class="hint-container tip">
 <p class="hint-container-title">开发者提示</p>
-<p>保持前后端分离：前端只暴露静态资源，接口走反代（如 Workers）。这样能最大化安全与稳定性。</p>
+<p>保持前后端分离：前端只暴露静态资源，接口走反代（如 Nginx/Workers）。这样能最大化安全与稳定性。</p>
 </div>
 </div></template>
 

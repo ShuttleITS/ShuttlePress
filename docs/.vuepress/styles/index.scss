@@ -162,6 +162,15 @@ html.dark {
   box-shadow: 0 16px 38px rgba(0, 0, 0, 0.06);
 }
 
+html.dark .home-panels .panel {
+  color: #e2e8f0;
+}
+
+html.dark .panel-note {
+  border-color: rgba(34, 211, 238, 0.28);
+  background: linear-gradient(120deg, rgba(34, 211, 238, 0.16), rgba(14, 165, 233, 0.14));
+}
+
 @media (max-width: 720px) {
   .home .hero {
     padding: 2.25rem 1.5rem;
