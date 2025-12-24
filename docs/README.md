@@ -2,7 +2,7 @@
 home: true
 title: Shuttle 主题
 heroText: Shuttle Theme
-tagline: 一次打包，随处部署。面向业务的高颜值、可定制、无服务器化主题。
+tagline: 一次打包，随处部署。面向业务的高颜值、可定制、支持无服务器化主题。
 actions:
   - text: 立即开始
     link: /get-started.html

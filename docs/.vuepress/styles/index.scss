@@ -1,4 +1,11 @@
 :root {
+  /* Override default VuePress accent to blue */
+  --vp-c-accent: #2563eb;
+  --vp-c-accent-bg: #1d4ed8;
+  --vp-c-accent-hover: #1e40af;
+  --vp-c-accent-text: #f8fafc;
+  --vp-c-accent-soft: rgba(37, 99, 235, 0.14);
+
   --shuttle-accent: #22d3ee;
   --shuttle-accent-strong: #0ea5e9;
   --shuttle-hero-bg: radial-gradient(circle at 20% 20%, #0d1b37, #0a1227 55%, #060b16 100%);
@@ -9,6 +16,12 @@
 }
 
 html[data-theme='dark'] {
+  --vp-c-accent: #60a5fa;
+  --vp-c-accent-bg: #3b82f6;
+  --vp-c-accent-hover: #2563eb;
+  --vp-c-accent-text: #e2e8f0;
+  --vp-c-accent-soft: rgba(96, 165, 250, 0.2);
+
   --shuttle-hero-bg: radial-gradient(circle at 20% 20%, #0f1c3f, #0a1123 55%, #050914 100%);
   --shuttle-card-bg: #0f172a;
   --shuttle-card-border: #1f2937;
@@ -61,6 +74,31 @@ html[data-theme='dark'] {
   border-radius: 999px;
   padding: 0.75rem 1.5rem;
   box-shadow: 0 15px 40px rgba(14, 165, 233, 0.25);
+}
+
+.vp-hero-action-button.primary {
+  background: #2563eb;
+  border: 1px solid #1d4ed8;
+  color: #f8fafc;
+  box-shadow: 0 16px 42px rgba(37, 99, 235, 0.35);
+}
+
+.vp-hero-action-button.primary:hover {
+  background: #1d4ed8;
+  border-color: #1e3a8a;
+  color: #f8fafc;
+}
+
+.vp-hero-action-button.secondary {
+  color: var(--shuttle-accent-strong);
+  background: rgba(34, 211, 238, 0.08);
+  border: 1px solid rgba(34, 211, 238, 0.35);
+}
+
+.vp-hero-action-button.secondary:hover {
+  background: rgba(34, 211, 238, 0.18);
+  color: var(--shuttle-accent-strong);
+  border-color: rgba(34, 211, 238, 0.6);
 }
 
 .features {
