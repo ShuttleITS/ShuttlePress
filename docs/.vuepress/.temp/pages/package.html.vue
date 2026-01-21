@@ -55,7 +55,23 @@
 </tr>
 </tbody>
 </table>
+<p><strong>客户端下载</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>客户端下载链接</td>
+<td>填写 OSS 或下载直链，供客户下载客户端，留空则不显示响应下载按钮。</td>
+</tr>
+</tbody>
+</table>
 <p><strong>苹果账号分享页</strong></p>
+<p>账号分享页为外部项目 <a href="https://appleauto.pro/" target="_blank" rel="noopener noreferrer">AppleAutoPro</a>。</p>
 <table>
 <thead>
 <tr>
@@ -78,27 +94,11 @@
 </tr>
 </tbody>
 </table>
-<p><strong>客户端下载</strong></p>
-<table>
-<thead>
-<tr>
-<th>字段</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>客户端下载链接</td>
-<td>填写 OSS 或下载直链，供客户下载客户端，留空则不显示响应下载按钮。</td>
-</tr>
-</tbody>
-</table>
 <h2 id="注意事项" tabindex="-1"><a class="header-anchor" href="#注意事项"><span>注意事项</span></a></h2>
 <ul>
 <li>机场名称一旦锁定不可修改，如需调整请联系管理员重置。</li>
 <li>前端域名必须为完整域名，最多 4 个，逗号分隔；域名外的空格请去除。</li>
-<li>默认 API 路径 <code v-pre>/api/v1/</code> 和 <code v-pre>/idhub-api/</code> 可按后端路由实际情况调整。</li>
-<li>如需前后端分离部署，后端 API 地址与 IDHub API 地址请保持默认路径（<code v-pre>/api/v1/</code>、<code v-pre>/idhub-api/</code>），避免因路径差异导致跨域或路由 404。</li>
+<li>默认 API 路径 <code v-pre>/api/v1/</code> 和 <code v-pre>/idhub-api/</code> 可按部署方式进行调整。</li>
 <li>额度限制：每个用户每日 2 次构建、5 次下载，合理安排构建次数，避免超额。</li>
 </ul>
 </div></template>
