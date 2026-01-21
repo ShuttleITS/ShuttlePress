@@ -14,6 +14,7 @@ export default defineUserConfig({
     navbar: [
       { text: '首页', link: '/' },
       { text: '使用指南', link: '/get-started' },
+      { text: ' Telegram', link: 'https://t.me/+p_S7ZR4E6_BmZGVh' },
     ],
     sidebar: [
       { children: ['/get-started.md','/changelog.md','/env.md'] },

@@ -1,6 +1,6 @@
-import { CodeTabs } from "/Users/yinian/Desktop/Shuttle/node_modules/@vuepress/plugin-markdown-tab/lib/client/components/CodeTabs.js";
-import { Tabs } from "/Users/yinian/Desktop/Shuttle/node_modules/@vuepress/plugin-markdown-tab/lib/client/components/Tabs.js";
-import "/Users/yinian/Desktop/Shuttle/node_modules/@vuepress/plugin-markdown-tab/lib/client/styles/vars.css";
+import { CodeTabs } from "/Users/yinian/Desktop/Project/Shuttle/node_modules/@vuepress/plugin-markdown-tab/lib/client/components/CodeTabs.js";
+import { Tabs } from "/Users/yinian/Desktop/Project/Shuttle/node_modules/@vuepress/plugin-markdown-tab/lib/client/components/Tabs.js";
+import "/Users/yinian/Desktop/Project/Shuttle/node_modules/@vuepress/plugin-markdown-tab/lib/client/styles/vars.css";
 
 export default {
   enhance: ({ app }) => {

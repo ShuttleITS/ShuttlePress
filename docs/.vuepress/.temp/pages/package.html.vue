@@ -3,33 +3,102 @@
 <blockquote>
 <p>该打包机面向购买用户，用于在线生成主题包。首次登录后需绑定机场名称并填写配置，生成的前端包会锁定到用户的机场信息。</p>
 </blockquote>
-<h2 id="登录与机场名称锁定" tabindex="-1"><a class="header-anchor" href="#登录与机场名称锁定"><span>登录与机场名称锁定</span></a></h2>
+<h2 id="机场名称锁定" tabindex="-1"><a class="header-anchor" href="#机场名称锁定"><span>机场名称锁定</span></a></h2>
 <ul>
 <li>首次登录打包机，在主页输入机场名称后即锁定，用户不可再次修改。</li>
 <li>前端构建页面会从已绑定的机场名称中读取该字段，无需重复输入。</li>
 </ul>
-<h2 id="构建表单字段" tabindex="-1"><a class="header-anchor" href="#构建表单字段"><span>构建表单字段</span></a></h2>
-<ul>
-<li><strong>站点 Logo</strong>：支持 <code v-pre>public/</code> 目录下的文件路径（如 <code v-pre>/logo.png</code>）或外部 URL。</li>
-<li><strong>前端域名</strong>：用于约束前端访问，最多 4 个，以逗号分隔，需填写完整域名（含协议可选，但域名必须完整）。</li>
-<li><strong>后端 API 地址</strong>：指向机场后端，默认 <code v-pre>/api/v1/</code>，根据实际后端路径修改。</li>
-<li><strong>Apple Id Share（苹果账户分享）</strong>：如需开启，先打开 toggle，再填写 <code v-pre>Apple Id Share API 地址</code>（默认 <code v-pre>/idhub-api/</code>）和 <code v-pre>IDHub API Key</code>（必填）。</li>
-<li><strong>客户端下载链接</strong>：填写 OSS 或下载直链，供客户下载客户端。</li>
-</ul>
 <h2 id="打包流程" tabindex="-1"><a class="header-anchor" href="#打包流程"><span>打包流程</span></a></h2>
 <ol>
 <li>登录打包机，首次输入机场名称（锁定）。</li>
-<li>在构建页填写/确认站点 Logo、前端域名、后端 API、Apple Id Share（可选）、客户端下载链接。</li>
+<li>在构建页选中模板后填写构建表单。</li>
 <li>点击「开始构建」后，会跳转到主页的构建队列等待；构建完成后自动跳转到构建下载页面，下载已构建的主题包（React+TS 静态前端）。</li>
 <li>将下载的主题包部署到你的前端域名。</li>
 </ol>
+<h2 id="构建表单字段" tabindex="-1"><a class="header-anchor" href="#构建表单字段"><span>构建表单字段</span></a></h2>
+<p><strong>站点信息</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>站点名称</td>
+<td>已在首页设置，不可修改（如需更改请联系管理员）。</td>
+</tr>
+<tr>
+<td>面板类型</td>
+<td>选择正确的后端类型，不同后端功能和接口会有区别。</td>
+</tr>
+<tr>
+<td>着陆页开关</td>
+<td>选择是否打开着陆页，着陆页内容可在静态主题下的 <code v-pre>landingpaeg-texts.json</code> 中配置。</td>
+</tr>
+<tr>
+<td>站点 Logo</td>
+<td>支持根目录下的文件路径（如 <code v-pre>/logo.png</code>）或外部 URL。</td>
+</tr>
+<tr>
+<td>登陆页背景</td>
+<td>支持根目录下的文件路径（如 <code v-pre>/car.png</code>）或外部 URL。</td>
+</tr>
+<tr>
+<td>前端域名</td>
+<td>用于约束前端访问，最多 4 个，以逗号分隔，需填写完整域名（含协议可选，但域名必须完整）。</td>
+</tr>
+<tr>
+<td>后端 API 地址</td>
+<td>指向机场后端，默认 <code v-pre>/api/v1/</code>，静态部署不需要修改，反代时连接到真实后端即可，severless 部署指向中间件 worker 地址。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>苹果账号分享页</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apple Id Share（苹果账户分享）</td>
+<td>如需开启，先打开 toggle。</td>
+</tr>
+<tr>
+<td>Apple Id Share API 地址</td>
+<td>默认 <code v-pre>/idhub-api/</code>如需serverless部署和后端API一样处理。</td>
+</tr>
+<tr>
+<td>IDHub API Key</td>
+<td>如开启分享页则必填。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>客户端下载</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>客户端下载链接</td>
+<td>填写 OSS 或下载直链，供客户下载客户端，留空则不显示响应下载按钮。</td>
+</tr>
+</tbody>
+</table>
 <h2 id="注意事项" tabindex="-1"><a class="header-anchor" href="#注意事项"><span>注意事项</span></a></h2>
 <ul>
 <li>机场名称一旦锁定不可修改，如需调整请联系管理员重置。</li>
 <li>前端域名必须为完整域名，最多 4 个，逗号分隔；域名外的空格请去除。</li>
 <li>默认 API 路径 <code v-pre>/api/v1/</code> 和 <code v-pre>/idhub-api/</code> 可按后端路由实际情况调整。</li>
 <li>如需前后端分离部署，后端 API 地址与 IDHub API 地址请保持默认路径（<code v-pre>/api/v1/</code>、<code v-pre>/idhub-api/</code>），避免因路径差异导致跨域或路由 404。</li>
-<li>Logo 可用本地静态文件或在线链接，确保打包后路径可访问。</li>
 <li>额度限制：每个用户每日 2 次构建、5 次下载，合理安排构建次数，避免超额。</li>
 </ul>
 </div></template>
